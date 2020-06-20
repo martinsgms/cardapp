@@ -1,12 +1,15 @@
 package br.com.martinsgms.cardapio.bean;
 
+import java.math.BigDecimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data @NoArgsConstructor @AllArgsConstructor
-public class Restaurante {
+@Data @AllArgsConstructor @NoArgsConstructor
+public class Item {
     
-    private Long id;
     private String nome;
+    private BigDecimal valor; 
+
 }
