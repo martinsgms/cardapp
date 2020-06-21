@@ -3,6 +3,7 @@ package br.com.martinsgms.cardapio.bean;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +15,9 @@ public class Restaurante {
     
     @Id @GeneratedValue
     private Long id;
+
+    @OneToOne
+    private Cardapio cardapio;
     
     private String nome;
 }

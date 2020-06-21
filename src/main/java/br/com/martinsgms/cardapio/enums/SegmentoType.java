@@ -4,6 +4,9 @@ public enum SegmentoType {
 
     ENTRADA,
     BEBIDA,
-    SOBREMESA
+    SOBREMESA,
+    MASSA,
+    HAMBURGER,
+    PIZZA
     
 }

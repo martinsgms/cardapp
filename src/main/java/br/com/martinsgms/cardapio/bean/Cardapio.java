@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,10 +20,7 @@ public class Cardapio {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
-    private Restaurante restaurante;
-
     @OneToMany
-    private List<Segmento> segmentos = new ArrayList<>();
+    private List<Item> itens = new ArrayList<>();
 
 }

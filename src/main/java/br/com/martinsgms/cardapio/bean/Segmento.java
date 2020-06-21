@@ -9,7 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import br.com.martinsgms.cardapio.enums.SegmentoType;
@@ -23,10 +23,7 @@ public class Segmento {
     
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @OneToMany
-    private List<Item> itens = new ArrayList<>();
-    
+   
     @Enumerated(EnumType.STRING)
     private SegmentoType tipo;
 }
