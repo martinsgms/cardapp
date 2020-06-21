@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.martinsgms.cardapio.bean.Cardapio;
 import br.com.martinsgms.cardapio.bean.Restaurante;
 import br.com.martinsgms.cardapio.bean.Segmento;
+import br.com.martinsgms.cardapio.bean.repository.CardapioRepository;
 import br.com.martinsgms.cardapio.bean.Item;
 
 
@@ -19,13 +21,13 @@ import br.com.martinsgms.cardapio.bean.Item;
 @RequestMapping("/cardapio")
 public class CardapioController {
     
+    @Autowired
+    private CardapioRepository repository;
+
     @GetMapping()
-    public Cardapio findAll() {
+    public String findAll() {
 
-        List<Item> itens = new ArrayList<>(Arrays.asList(new Item("Salada", new BigDecimal(11.90))));
-        List<Segmento> segmentos = new ArrayList<>(Arrays.asList(new Segmento(1L, "Entradas", itens)));
-
-        return new Cardapio(1L, new Restaurante(1L, "Restaurante da Dona Florinda"), segmentos);
+        return "";
     }
 
 }
