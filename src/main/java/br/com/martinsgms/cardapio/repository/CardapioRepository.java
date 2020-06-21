@@ -1,4 +1,4 @@
-package br.com.martinsgms.cardapio.bean.repository;
+package br.com.martinsgms.cardapio.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

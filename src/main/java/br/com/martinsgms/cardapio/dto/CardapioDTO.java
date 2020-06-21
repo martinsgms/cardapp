@@ -1,4 +1,4 @@
-package br.com.martinsgms.cardapio.controller.dto;
+package br.com.martinsgms.cardapio.dto;
 
 import java.util.ArrayList;
 import java.util.List;

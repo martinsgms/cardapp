@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.martinsgms.cardapio.bean.Cardapio;
 import br.com.martinsgms.cardapio.bean.Restaurante;
 import br.com.martinsgms.cardapio.bean.Segmento;
-import br.com.martinsgms.cardapio.bean.repository.CardapioRepository;
+import br.com.martinsgms.cardapio.repository.CardapioRepository;
 import br.com.martinsgms.cardapio.bean.Item;
 
 
