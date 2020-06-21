@@ -24,9 +24,6 @@ public class Segmento {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
-    private Cardapio cardapio;
-
     @OneToMany
     private List<Item> itens = new ArrayList<>();
     

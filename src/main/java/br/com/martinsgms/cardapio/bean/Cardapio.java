@@ -24,7 +24,7 @@ public class Cardapio {
     @OneToOne
     private Restaurante restaurante;
 
-    @OneToMany(mappedBy = "cardapio")
+    @OneToMany
     private List<Segmento> segmentos = new ArrayList<>();
 
 }
