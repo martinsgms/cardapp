@@ -3,6 +3,8 @@ package br.com.martinsgms.cardapio.controller;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
@@ -41,7 +43,10 @@ public class RestauranteController {
     }
 
     @PostMapping()
-    public ResponseEntity<RestauranteDTO> novoRestaurante(@RequestBody RestauranteForm form, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<RestauranteDTO> novoRestaurante(
+        @RequestBody @Valid RestauranteForm form,
+        UriComponentsBuilder uriBuilder) {
+
         Restaurante restaurante = form.toRestaurante();
         
         cardapioeRepository.save(restaurante.getCardapio());
@@ -51,6 +56,7 @@ public class RestauranteController {
             .buildAndExpand(restaurante.getId())
             .toUri();
 
-        return ResponseEntity.created(uri).body(new RestauranteDTO(restaurante));
+        return ResponseEntity.created(uri)
+            .body(new RestauranteDTO(restaurante));
     }
 }
