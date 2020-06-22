@@ -1,6 +1,7 @@
 package br.com.martinsgms.cardapio.bean;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,10 +14,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor 
+@Data @NoArgsConstructor @AllArgsConstructor
 public class Item {
-    
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+      
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @ManyToOne

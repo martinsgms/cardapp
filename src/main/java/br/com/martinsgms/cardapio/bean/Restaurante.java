@@ -2,6 +2,7 @@ package br.com.martinsgms.cardapio.bean;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
@@ -13,11 +14,15 @@ import lombok.NoArgsConstructor;
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Restaurante {
     
-    @Id @GeneratedValue
+    public Restaurante(String nome) {
+        this.nome = nome;
+	}
+
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
-    private Cardapio cardapio;
+    private Cardapio cardapio = new Cardapio();
     
     private String nome;
 }
