@@ -9,7 +9,9 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +24,7 @@ import br.com.martinsgms.cardapio.dto.RestauranteDTO;
 import br.com.martinsgms.cardapio.form.RestauranteForm;
 import br.com.martinsgms.cardapio.repository.CardapioRepository;
 import br.com.martinsgms.cardapio.repository.RestauranteRepository;
-import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 
@@ -44,6 +46,18 @@ public class RestauranteController {
 
         return RestauranteDTO.covert(restauranteRepository.findAll());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findRestauranteById(@PathVariable Long id) {
+
+        Optional<Restaurante> searchRestaurante = restauranteRepository.findById(id);
+
+        if(!searchRestaurante.isPresent())
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(new RestauranteDTO(searchRestaurante.get()));
+    }
+    
 
     @PostMapping
     public ResponseEntity<RestauranteDTO> newRestaurante(@RequestBody @Valid RestauranteForm form,
@@ -72,8 +86,21 @@ public class RestauranteController {
             return ResponseEntity.notFound().build();
         
         Restaurante restaurante = searchRestaurante.get();
-        
+
         restaurante.merge(form);
         return ResponseEntity.ok(restauranteRepository.save(restaurante));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteRestaurante(@PathVariable Long id) {
+        
+        Optional<Restaurante> searchRestaurante = restauranteRepository.findById(id);
+
+        if(!searchRestaurante.isPresent())
+            return ResponseEntity.notFound().build();
+
+        restauranteRepository.deleteById(id);
+
+        return ResponseEntity.ok().build();
     }
 }
