@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import br.com.martinsgms.cardapio.form.RestauranteForm;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,4 +26,8 @@ public class Restaurante {
     private Cardapio cardapio = new Cardapio();
     
     private String nome;
+
+	public void merge(RestauranteForm form) {
+        this.nome = form.getNome();
+	}
 }
