@@ -3,6 +3,8 @@ package br.com.martinsgms.cardapio.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+
 import br.com.martinsgms.cardapio.bean.Restaurante;
 import lombok.Getter;
 
@@ -21,5 +23,9 @@ public class RestauranteDTO {
 
 	public static List<RestauranteDTO> covert(List<Restaurante> restaurantes) {
 		return restaurantes.stream().map(RestauranteDTO::new).collect(Collectors.toList());
+    }
+    
+	public static Page<RestauranteDTO> covert(Page<Restaurante> restaurantes) {
+		return restaurantes.map(RestauranteDTO::new);
 	}
 }

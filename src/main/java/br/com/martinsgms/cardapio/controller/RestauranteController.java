@@ -1,12 +1,14 @@
 package br.com.martinsgms.cardapio.controller;
 
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -24,9 +27,6 @@ import br.com.martinsgms.cardapio.dto.RestauranteDTO;
 import br.com.martinsgms.cardapio.form.RestauranteForm;
 import br.com.martinsgms.cardapio.repository.CardapioRepository;
 import br.com.martinsgms.cardapio.repository.RestauranteRepository;
-
-
-
 
 
 @RestController
@@ -40,11 +40,16 @@ public class RestauranteController {
     private CardapioRepository cardapioeRepository;
 
     @GetMapping 
-    public List<RestauranteDTO> listAll(String nome) {
-        if(!StringUtils.isEmpty(nome))
-            return RestauranteDTO.covert(restauranteRepository.findByNome(nome));
+    public Page<RestauranteDTO> listAll(@RequestParam(required = false) String nome,
+        @RequestParam(required = true, name = "p") Integer page,
+        @RequestParam(required = true, name = "s") Integer size) {
+        
+        Pageable pagination = PageRequest.of(page, size);
 
-        return RestauranteDTO.covert(restauranteRepository.findAll());
+        if(!StringUtils.isEmpty(nome))
+            return RestauranteDTO.covert(restauranteRepository.findByNome(nome, pagination));
+
+        return RestauranteDTO.covert(restauranteRepository.findAll(pagination));
     }
 
     @GetMapping("/{id}")
