@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -66,6 +67,7 @@ public class RestauranteController {
     
 
     @PostMapping
+    @CacheEvict(value = "listAllRestaurantes", allEntries = true)
     public ResponseEntity<RestauranteDTO> newRestaurante(@RequestBody @Valid RestauranteForm form,
         UriComponentsBuilder uriBuilder) {
 
@@ -83,6 +85,7 @@ public class RestauranteController {
     }
 
     @PutMapping("/{id}")
+    @CacheEvict(value = "listAllRestaurantes", allEntries = true)
     public ResponseEntity<?> updateRestaurantee(@PathVariable Long id,
         @RequestBody @Valid RestauranteForm form) {
 
@@ -98,6 +101,7 @@ public class RestauranteController {
     }
 
     @DeleteMapping("/{id}")
+    @CacheEvict(value = "listAllRestaurantes", allEntries = true)
     public ResponseEntity<?> deleteRestaurante(@PathVariable Long id) {
         
         Optional<Restaurante> searchRestaurante = restauranteRepository.findById(id);
