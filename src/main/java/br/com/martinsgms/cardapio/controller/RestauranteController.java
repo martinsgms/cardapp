@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,11 +43,8 @@ public class RestauranteController {
 
     @GetMapping 
     public Page<RestauranteDTO> listAll(@RequestParam(required = false) String nome,
-        @RequestParam(required = true, name = "p") Integer page,
-        @RequestParam(required = true, name = "s") Integer size) {
+        @PageableDefault(page = 0, size = 10, sort = "nome", direction = Direction.ASC) Pageable pagination) {
         
-        Pageable pagination = PageRequest.of(page, size);
-
         if(!StringUtils.isEmpty(nome))
             return RestauranteDTO.covert(restauranteRepository.findByNome(nome, pagination));
 
