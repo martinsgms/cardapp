@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.util.StringUtils;
+
 public enum SegmentoType {
 
     ENTRADA,
@@ -14,9 +16,16 @@ public enum SegmentoType {
     PIZZA;
 
     public static SegmentoType getFromName(String name) {
-        List<SegmentoType> enums = new ArrayList<>(Arrays.asList(SegmentoType.values())); 
+        
+        if(StringUtils.isEmpty(name) || !StringUtils.hasText(name))
+            throw new IllegalArgumentException("Invalid enum name");
 
-        return enums.stream().filter(e -> e.name().equals(name)).findFirst().get();
+        return new ArrayList<SegmentoType>(
+            Arrays.asList(SegmentoType.values()))
+                .stream()
+                .filter(e -> e.name().equals(name))
+                .findFirst()
+                .get();
     }
     
 }
