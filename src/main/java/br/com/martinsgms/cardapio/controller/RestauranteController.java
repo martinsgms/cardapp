@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -42,7 +43,8 @@ public class RestauranteController {
     private CardapioRepository cardapioeRepository;
 
     @GetMapping 
-    public Page<RestauranteDTO> listAll(@RequestParam(required = false) String nome,
+    @Cacheable(value = "listAllRestaurantes")
+    public Page<RestauranteDTO> listAllRestaurantes(@RequestParam(required = false) String nome,
         @PageableDefault(page = 0, size = 10, sort = "nome", direction = Direction.ASC) Pageable pagination) {
         
         if(!StringUtils.isEmpty(nome))
