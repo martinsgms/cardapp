@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.martinsgms.cardapio.config.security.service.TokenService;
+import br.com.martinsgms.cardapio.dto.TokenDTO;
 import br.com.martinsgms.cardapio.form.AuthForm;
 
 
@@ -34,8 +35,7 @@ public class AuthController {
             Authentication authenticate = authenticationManager.authenticate(authData);
             String token = tokenService.generate(authenticate);
 
-            System.out.println(token);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(new TokenDTO(token, "Bearer"));
             
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
